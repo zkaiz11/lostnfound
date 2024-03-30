@@ -8,6 +8,6 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
         onPressed: () => AuthenticationController().logout(),
-        child: Text("Log Out"));
+        child: const Text("Log Out"));
   }
 }

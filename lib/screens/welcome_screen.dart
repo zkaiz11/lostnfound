@@ -108,7 +108,7 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 class OnBoard extends StatelessWidget {
-  const OnBoard({Key? key}) : super(key: key);
+  const OnBoard({super.key});
 
   @override
   Widget build(BuildContext context) {

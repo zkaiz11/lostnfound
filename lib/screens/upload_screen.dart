@@ -6,7 +6,7 @@ class UploadScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("Upload Screen"),
+      child: const Text("Upload Screen"),
     );
   }
 }

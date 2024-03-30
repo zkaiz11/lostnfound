@@ -8,13 +8,13 @@ class NetWorkManager extends GetxController {
   static NetWorkManager get instance => Get.find();
 
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectiviySubcription;
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
 
   @override
   void onInit() {
     super.onInit();
-    _connectiviySubcription =
+    _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectivityStatus);
   }
 
@@ -44,6 +44,6 @@ class NetWorkManager extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    _connectiviySubcription.cancel();
+    _connectivitySubscription.cancel();
   }
 }

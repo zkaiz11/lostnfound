@@ -29,23 +29,22 @@ class AuthenticationController extends GetxController with CacheManager {
       UserCredential userCredential =
           await FirebaseAuthService().signInWithGoogle();
       if (FirebaseAuth.instance.currentUser != null) {
-        final user = UserModel(
-          googleUid: userCredential.user!.uid,
-          name: userCredential.user!.displayName!,
-          email: userCredential.user!.email!,
-          pfp: userCredential.user!.photoURL!,
-          location: '',
-          createdAt: Timestamp.fromDate(DateTime.now()),
-          isDeleted: false,
-        );
         await saveToken(userCredential.credential?.accessToken);
-        if (userCredential.additionalUserInfo!.isNewUser == false) {
+        if (userCredential.additionalUserInfo!.isNewUser == true) {
+            final user = UserModel(
+            googleUid: userCredential.user!.uid,
+            name: userCredential.user!.displayName!,
+            email: userCredential.user!.email!,
+            pfp: userCredential.user!.photoURL!,
+            location: '',
+            createdAt: Timestamp.fromDate(DateTime.now()),
+            isDeleted: false,
+          );
           await UserRepository.instance.saveUser(user);
-        } else {
-          Loader.closeLoading();
-          Loader.success(title: "Login Successful.");
-          Get.offAllNamed('/home');
-        }
+        } 
+        Loader.closeLoading();
+        Loader.success(title: "Login Successful.");
+        Get.offAllNamed('/home');
       }
     } catch (e) {
       Loader.error(title: "Something is wrong");

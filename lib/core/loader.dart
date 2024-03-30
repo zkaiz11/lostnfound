@@ -49,11 +49,11 @@ class Loader {
         builder: (_) => PopScope(
             canPop: false,
             child: Container(
-              color: Color.fromARGB(132, 115, 113, 113),
+              color: const Color.fromARGB(132, 115, 113, 113),
               width: double.infinity,
               height: double.infinity,
-              child: Column(children: [
-                const SizedBox(
+              child: const Column(children: [
+                SizedBox(
                   height: 250,
                 ),
                 AnimationLoader()

@@ -4,8 +4,7 @@ class AnimationLoader extends StatefulWidget {
   final double size;
   final Color color;
 
-  AnimationLoader({Key? key, this.size = 50.0, this.color = Colors.blue})
-      : super(key: key);
+  const AnimationLoader({super.key, this.size = 50.0, this.color = Colors.blue});
 
   @override
   _AnimationLoaderState createState() => _AnimationLoaderState();
@@ -21,7 +20,7 @@ class _AnimationLoaderState extends State<AnimationLoader>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 1000),
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -74,7 +73,7 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: const Column(
         children: [],
       ),
     );

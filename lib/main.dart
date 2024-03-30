@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lostnfound/controllers/authentication_controller.dart';
+import 'package:lostnfound/controllers/location_controller.dart';
 import 'package:lostnfound/core/network_manager.dart';
 import 'package:lostnfound/firebase_options.dart';
 import 'package:lostnfound/navigation_menu.dart';
 import 'package:lostnfound/repositories/user_repository.dart';
 import 'package:lostnfound/screens/login_screen.dart';
-import 'package:lostnfound/screens/set_location/screen.dart';
+import 'package:lostnfound/screens/location_screen.dart';
 import 'package:lostnfound/screens/welcome_screen.dart';
 
 void main() async {
@@ -87,5 +88,6 @@ class GeneralBindings implements Bindings {
     Get.put(NetWorkManager());
     Get.put(AuthenticationController());
     Get.put(UserRepository());
+    Get.put(LocationController());
   }
 }

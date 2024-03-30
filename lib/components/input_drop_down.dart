@@ -9,7 +9,7 @@ class InputDropDown extends StatelessWidget {
       this.selectedItemBuilder,
       this.value,
       required this.textEditingController});
-  final List<String> dropdownItems;
+  final List<String?> dropdownItems;
   final TextEditingController textEditingController;
   final ValueChanged<String?>? onChanged;
   final DropdownButtonBuilder? selectedItemBuilder;
@@ -18,8 +18,8 @@ class InputDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       width: double.infinity,
       decoration: BoxDecoration(
           border: Border.all(width: 1),
@@ -36,7 +36,7 @@ class InputDropDown extends StatelessWidget {
           ),
           items: dropdownItems
               .map((item) => DropdownMenuItem(
-                    value: item,
+                    value: item!,
                     child: Text(
                       item,
                       style: const TextStyle(
