@@ -1,24 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lostnfound/models/post_model.dart';
 import 'package:lostnfound/screens/post_screen.dart';
-import 'package:lostnfound/services/firebase_fcm.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class SearchResultScreen extends StatefulWidget {
+  const SearchResultScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SearchResultScreen> createState() => _SearchResultScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  String? name = FirebaseAuth.instance.currentUser!.displayName;
-  String timeOfDay = '';
+class _SearchResultScreenState extends State<SearchResultScreen> {
+  List<String?> searchParams = Get.arguments;
 
   Future<List<Map<String, PostModel>>> fetchTenPostsWithId() async {
     List<Map<String, PostModel>> postsWithId = [];
@@ -26,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('post')
           .where('is_claimed', isEqualTo: false)
+          .where('location', isEqualTo: searchParams[1])
+          .where('category', isEqualTo: searchParams[0])
           .orderBy('created_at', descending: true)
           .limit(10) // Fetch 10 posts
           .get();
@@ -51,87 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return postsWithId;
   }
 
-  List<PostModel> posts = [];
-
-  void updateTimeOfDay() {
-    DateTime now = DateTime.now();
-    int hour = now.hour;
-    setState(() {
-      if (hour >= 6 && hour < 12) {
-        timeOfDay = 'Morning';
-      } else if (hour >= 12 && hour < 17) {
-        timeOfDay = 'Afternoon';
-      } else {
-        timeOfDay = 'Evening';
-      }
-    });
-  }
-
-  final ScrollController _scrollController = ScrollController();
-  // final List<PostModel> _posts = [];
-  // bool _isLoading = false;
-
-  Future<void> _initFCM() async {
-    await FirebaseFCM().initNotification();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // _loadPosts();
-    _scrollController.addListener(_scrollListener);
-    updateTimeOfDay();
-    _initFCM();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _scrollListener() {
-    if (_scrollController.position.pixels ==
-        _scrollController.position.maxScrollExtent) {
-      //loadmore
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('EEEE, MMMM d, y').format(now);
     return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: [
-            Text(
-              "Good $timeOfDay",
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Text(
-                formattedDate,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          // IconButton(
-          //   icon: const Icon(CupertinoIcons.chat_bubble_2_fill),
-          //   onPressed: () {},
-          // ),
-          IconButton(
-            icon: const Icon(CupertinoIcons.bell_fill),
-            onPressed: () {
-              Get.toNamed('notification');
-            },
-          )
-        ],
-      ),
+      appBar: AppBar(),
       body: FutureBuilder<List<Map<String, PostModel>>>(
         future: fetchTenPostsWithId(),
         builder: (context, snapshot) {
@@ -239,3 +158,4 @@ class PostCard extends StatelessWidget {
     );
   }
 }
+

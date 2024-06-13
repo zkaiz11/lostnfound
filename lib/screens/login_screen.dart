@@ -59,18 +59,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BigButton(
-                      icon: Icons.facebook_outlined,
-                      login: () => FirebaseAuthService()
-                          .signInWithFacebook()
-                          .then((user) =>
-                              Loader.success(title: 'Login Successful.'))
-                          .then((value) => Get.offAllNamed('/home'))
-                      // .catchError((err) => {print(err)})
-                      ,
-                      name: "Continue with Facebook",
-                      textColor: Colors.white,
-                      color: const Color(0xff316FF6)),
+                  // BigButton(
+                  //     icon: Icons.facebook_outlined,
+                  //     login: () => FirebaseAuthService()
+                  //         .signInWithFacebook()
+                  //         .then((user) =>
+                  //             Loader.success(title: 'Login Successful.'))
+                  //         .then((value) => Get.offAllNamed('/home'))
+                  //     // .catchError((err) => {print(err)})
+                  //     ,
+                  //     name: "Continue with Facebook",
+                  //     textColor: Colors.white,
+                  //     color: const Color(0xff316FF6)),
                   BigButton(
                       icon: Icons.mail,
                       login: () => AuthenticationController().loginWithGoogle(),

@@ -16,6 +16,12 @@ mixin CacheManager {
     final box = GetStorage();
     await box.remove(CacheManagerKey.TOKEN.toString());
   }
+
+  Future<bool> saveProvince(String? province) async {
+    final box = GetStorage();
+    await box.write(CacheManagerKey.TOKEN.toString(), province);
+    return true;
+  }
 }
 
 enum CacheManagerKey { TOKEN }

@@ -1,30 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lostnfound/models/post_model.dart';
 import 'package:lostnfound/models/user_model.dart';
 
-class UserRepository extends GetxController {
-  static UserRepository get instance => Get.find();
+class PostRepository extends GetxController {
+  static PostRepository get instance => Get.find();
   final db = FirebaseFirestore.instance;
 
   //Save user
-  Future<void> saveUser(UserModel user) async {
+  Future<void> savePost(PostModel post) async {
     try {
-      db.collection("user").add(user.toJson()).then((DocumentReference doc) =>
+      db.collection("post").add(post.toJson()).then((DocumentReference doc) =>
           print('DocumentSnapshot added with ID: ${doc.id}'));
     } on FirebaseException catch (e) {
-      throw Exception(e.message);
-    } on FormatException catch (e) {
-      throw Exception(e.message);
-    } on PlatformException catch (e) {
-      throw Exception(e.message);
-    } catch (e) {
-      throw "something went wrong";
-    }
-  }
-
-  Future<void> setUserLocation(String location) async {
-    try {} on FirebaseException catch (e) {
       throw Exception(e.message);
     } on FormatException catch (e) {
       throw Exception(e.message);
@@ -56,29 +45,6 @@ class UserRepository extends GetxController {
       throw "something went wrong";
     }
   }
-
-  Future<UserModel> getUserByEmail(String email) async {
-    try {
-      final querySnapshot =
-          await db.collection("user").where("email", isEqualTo: email).get();
-      if (querySnapshot.docs.isNotEmpty) {
-        final userInfo =
-            querySnapshot.docs.first.data();
-        return UserModel.fromJson(userInfo);
-      } else {
-        throw Exception("User not found");
-      }
-    } on FirebaseException catch (e) {
-      throw Exception(e.message);
-    } on FormatException catch (e) {
-      throw Exception(e.message);
-    } on PlatformException catch (e) {
-      throw Exception(e.message);
-    } catch (e) {
-      throw "something went wrong";
-    }
-  }
-
 
   Future<void> updateUserDataByEmail(String email, Map<String, dynamic> updatedData) async {
     try {

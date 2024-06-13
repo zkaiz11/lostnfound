@@ -18,8 +18,8 @@ class InputDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
       width: double.infinity,
       decoration: BoxDecoration(
           border: Border.all(width: 1),

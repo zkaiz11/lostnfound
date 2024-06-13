@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:lostnfound/screens/home_screen.dart';
-import 'package:lostnfound/screens/profile_screen.dart';
+import 'package:lostnfound/screens/menu_screen.dart';
 import 'package:lostnfound/screens/search_screan.dart';
 import 'package:lostnfound/screens/upload_screen.dart';
 
@@ -18,67 +17,16 @@ class NavigationMenu extends StatefulWidget {
 class _NavigationMenuState extends State<NavigationMenu> {
   String? name = FirebaseAuth.instance.currentUser!.displayName;
 
-  String timeOfDay = '';
-
   final controller = Get.put(NaviagtaionController());
 
   @override
   void initState() {
     super.initState();
-    updateTimeOfDay();
-  }
-
-  void updateTimeOfDay() {
-    DateTime now = DateTime.now();
-    int hour = now.hour;
-    setState(() {
-      if (hour >= 6 && hour < 12) {
-        timeOfDay = 'Morning';
-      } else if (hour >= 12 && hour < 17) {
-        timeOfDay = 'Afternoon';
-      } else {
-        timeOfDay = 'Evening';
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat('EEEE, MMMM d, y').format(now);
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          title: Column(
-            children: [
-              Text(
-                "Good $timeOfDay",
-                style:
-                    const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                formattedDate,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-          centerTitle: false,
-          actions: [
-            IconButton(
-              icon: const Icon(CupertinoIcons.chat_bubble_2_fill),
-              onPressed: () {
-                updateTimeOfDay();
-              },
-            ),
-            IconButton(
-              icon: const Icon(CupertinoIcons.bell_fill),
-              onPressed: () {
-                updateTimeOfDay();
-              },
-            ),
-          ],
-        ),
         body: Obx(() => controller.screens[controller.selectedIndex.value]),
         bottomNavigationBar: Obx(() => NavigationBar(
               height: 80,
@@ -95,7 +43,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
                     icon: Icon(CupertinoIcons.add), label: "post"),
                 NavigationDestination(
                     icon: Icon(CupertinoIcons.profile_circled),
-                    label: "profile"),
+                    label: "Settings"),
               ],
             )));
   }
@@ -107,6 +55,6 @@ class NaviagtaionController extends GetxController {
     HomeScreen(),
     SearchScreen(),
     UploadScreen(),
-    ProfileScreen(),
+    MenuScreen(),
   ];
 }
