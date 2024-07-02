@@ -121,7 +121,6 @@ class _UploadScreenState extends State<UploadScreen> {
         isClaimed: false,
         imgUrl: imgUrl,
       );
-      print("here");
       await PostRepository.instance.savePost(post);
       Loader.success(title: "Post Uploaded.");
       setState(() {

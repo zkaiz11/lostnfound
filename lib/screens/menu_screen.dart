@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lostnfound/controllers/authentication_controller.dart';
+import 'package:lostnfound/screens/account_detial_screen.dart';
+import 'package:lostnfound/screens/your_claims_screen.dart';
+import 'package:lostnfound/screens/your_posts_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -20,29 +24,29 @@ class MenuScreen extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
             ),
           ),
-          // GestureDetector(
-          //   onTap: () {
-          //     Get.toNamed('/initlocation');
-          //   },
-          //   child: const Padding(
-          //     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       children: [
-          //         Icon(CupertinoIcons.map),
-          //         Expanded(
-          //             child: Padding(
-          //           padding: EdgeInsets.symmetric(horizontal: 8),
-          //           child: Text(
-          //             "Location",
-          //             style: TextStyle(fontSize: 16),
-          //           ),
-          //         )),
-          //         Icon(CupertinoIcons.chevron_forward),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          GestureDetector(
+            onTap: (){
+              Get.to(() => const AccountDetial());
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(CupertinoIcons.person_crop_square),
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      "Change Account Information",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )),
+                  Icon(CupertinoIcons.chevron_forward),
+                ],
+              ),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(
@@ -61,22 +65,50 @@ class MenuScreen extends StatelessWidget {
               ],
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(CupertinoIcons.settings),
-                Expanded(
-                    child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(
-                    "Your Posts",
-                    style: TextStyle(fontSize: 16),
-                  ),
-                )),
-                Icon(CupertinoIcons.chevron_forward),
-              ],
+          GestureDetector(
+            onTap: () {
+              Get.to(() => const YourPostsScreen());
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(CupertinoIcons.list_dash),
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      "Your Posts",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )),
+                  Icon(CupertinoIcons.chevron_forward),
+                ],
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Get.to(() => const YourClaimsScreen());
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Icon(CupertinoIcons.arrow_turn_down_right),
+                  Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Text(
+                      "Your Claim Requests",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  )),
+                  Icon(CupertinoIcons.chevron_forward),
+                ],
+              ),
             ),
           ),
           const Padding(
